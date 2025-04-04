@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="{% static 'asset/css/payment.css' %}">
+</head>
+<body>
+    <h1>Payment</h1>
+    <form action="{% url 'core:payment' %}" method="post" id="payment-form">
+        {% csrf_token %}
+        <div id="card-element"></div>
+        <button type="submit">Pay</button>
+    </form>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        var stripe = Stripe('{{ stripe_publishable_key }}'); // Use the publishable key from Django settings
+        var elements = stripe.elements();
+
+        var card = elements.create('card');
+        card.mount('#card-element');
+
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            stripe.createToken(card).then(function(result) {
+                if (result.error) {
+                    console.log(result.error.message);  // Display error to the user
+                } else {
+                    var tokenInput = document.createElement('input');
+                    tokenInput.setAttribute('type', 'hidden');
+                    tokenInput.setAttribute('name', 'stripeToken');
+                    tokenInput.setAttribute('value', result.token.id);
+                    form.appendChild(tokenInput);
+                    form.submit();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

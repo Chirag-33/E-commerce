@@ -1,0 +1,30 @@
+{% extends 'core/navbar.html' %}
+{% load static  %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+</head>
+<body>
+
+    {% block content %}
+        <h1>Product List</h1>
+        <div class="product-container">
+            {% for product in products %}
+                <div >
+                    <img src="{{ product.image }}" alt="{{ product.name }}" class="product-image">
+                    <h2>{{ product.name }}</h2>
+                    <p>{{ product.category }}</p>
+                    <p>{{ product.description }}</p>
+                    <p>{{ product.price }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    <footer>
+
+    </footer>
+    <script src="{% static 'asset\js\script.js' %}"></script>
+    {% endblock %}
+</body>
+</html>

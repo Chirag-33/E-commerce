@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Products</title>
+    <link rel="stylesheet" href="{% static 'asset/css/add_product.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="background">
+
+            {% if messages %}
+    <div class="message-container">
+        {% for message in messages %}
+            <div class="custom-alert custom-{{ message.tags }}">
+                {{ message }}
+                <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+        
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Add Products</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

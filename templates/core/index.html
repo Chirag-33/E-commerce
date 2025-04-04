@@ -1,0 +1,209 @@
+{% extends 'core/navbar.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'asset/css/style.css' %}">
+</head>
+<body>
+    {% block content %}
+    <header class="hero-section">
+        <div class="content">
+            <img src="{% static 'asset/images/header.jpg' %}" class="logo" alt="">
+        </div>
+    </header>
+    <section class="product">
+
+
+
+
+        <h2 class="product-category">best selling</h2>
+        <div class="product-slider">
+            <div class="product-container">
+                {% for product in best_selling_products %}
+                <a href="{% url 'core:product_detail' product.id %}">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{ product.image }}"   class="product-thumb" alt="">
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">{{ product.name }}</h2>
+                        <p class="product-short-des">{{ product.description }}</p>
+                        <span class="price">${{ product.price }}</span>
+                    </div>
+                    <a href="{% url 'core:add_to_cart' product.id %}"><button class="card-btn">add to wishlist</button></a>
+                </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h2 class="product-category">New Arrivals</h2>
+        <div class="product-slider">
+
+            <div class="product-container">
+                {% for product in new_arrivals %}
+                <a href="{% url 'core:product_detail' product.id %}">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{ product.image }}" class="product-thumb" alt="">
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">{{ product.name }}</h2>
+                        <p class="product-short-des">{{ product.description }}</p>
+                        <span class="price">${{ product.price }}</span>
+                    </div>
+                    <a href="{% url 'core:add_to_cart' product.id %}"><button class="card-btn">add to wishlist</button></a>
+                </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+    
+
+        <h2 class="product-category">Grocery</h2>
+        <div class="product-slider">
+
+            <div class="product-container">
+                {% for product in Grocery %}
+                <a href="{% url 'core:product_detail' product.id %}">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{ product.image }}" class="product-thumb" alt="">
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">{{ product.name }}</h2>
+                        <p class="product-short-des">{{ product.description }}</p>
+                        <span class="price">${{ product.price }}</span>
+                    </div>
+                    <a href="{% url 'core:add_to_cart' product.id %}"><button class="card-btn">add to wishlist</button></a>
+                </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h2 class="product-category">Books</h2>
+        <div class="product-slider">
+
+            <div class="product-container">
+                {% for product in Books %}
+                <a href="{% url 'core:product_detail' product.id %}">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{ product.image }}" class="product-thumb" alt="">
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">{{ product.name }}</h2>
+                        <p class="product-short-des">{{ product.description }}</p>
+                        <span class="price">${{ product.price }}</span>
+                    </div>
+                    <a href="{% url 'core:add_to_cart' product.id %}"><button class="card-btn">add to wishlist</button></a>
+                </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h2 class="product-category">Camera</h2>
+        <div class="product-slider">
+
+            <div class="product-container">
+                {% for product in Camera %}
+                <a href="{% url 'core:product_detail' product.id %}">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{ product.image }}" class="product-thumb" alt="">
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">{{ product.name }}</h2>
+                        <p class="product-short-des">{{ product.description }}</p>
+                        <span class="price">${{ product.price }}</span>
+                    </div>
+                    <a href="{% url 'core:add_to_cart' product.id %}"><button class="card-btn">add to wishlist</button></a>
+                </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h2 class="product-category">Shoes</h2>
+        <div class="product-slider">
+
+            <div class="product-container">
+                {% for product in Shoes %}
+                <a href="{% url 'core:product_detail' product.id %}">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{ product.image }}" class="product-thumb" alt="">
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">{{ product.name }}</h2>
+                        <p class="product-short-des">{{ product.description }}</p>
+                        <span class="price">${{ product.price }}</span>
+                    </div>
+                    <a href="{% url 'core:add_to_cart' product.id %}"><button class="card-btn">add to wishlist</button></a>
+                </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h2 class="product-category">Clothes</h2>
+        <div class="product-slider">
+            <div class="product-container">
+                {% for product in Clothes %}
+                <a href="{% url 'core:product_detail' product.id %}">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{ product.image }}" class="product-thumb" alt="">
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">{{ product.name }}</h2>
+                        <p class="product-short-des">{{ product.description }}</p>
+                        <span class="price">${{ product.price }}</span>
+                    </div>
+                    <a href="{% url 'core:add_to_cart' product.id %}"><button class="card-btn">add to wishlist</button></a>
+                </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h2 class="product-category">Furniture</h2>
+        <div class="product-slider">
+
+            <div class="product-container">
+                {% for product in Furniture %}
+                <a href="{% url 'core:product_detail' product.id %}">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{ product.image }}" class="product-thumb" alt="">
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">{{ product.name }}</h2>
+                        <p class="product-short-des">{{ product.description }}</p>
+                        <span class="price">${{ product.price }}</span>
+                    </div>
+                    <a href="{% url 'core:add_to_cart' product.id %}"><button class="card-btn">add to wishlist</button></a>
+                </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        
+
+
+
+    </section>
+    <footer data-logo-url="{% static 'asset/images/e-commerce logo.jpeg' %}"></footer>
+
+    <script src="{% static 'asset/js/script.js' %}"></script>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,38 @@
+    {% load static %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Profile</title>
+        <link rel="stylesheet" href="{% static 'asset/css/profile.css' %}">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Profile</h1>
+            <div class="profile-container">
+                <div class="profile-picture">
+                    {% if profile_picture %}
+                        <img src="{{ profile_picture.url }}" alt="Profile Picture">
+                    {% else %}
+                        <img src="{% static 'asset/images/default_profile.png' %}" alt="Default Profile Picture">
+                    {% endif %}
+                </div>
+                <div class="profile-info">
+                    <p><strong>Username:</strong> {{ username }}</p>
+                    <p><strong>Email:</strong> {{ email }}</p>
+                    <p><strong>Phone Number:</strong> {{ phone_number }}</p>
+                    <p><strong>Joined:</strong> {{ created_at }}</p>
+                </div>
+            </div>
+            <div class="form-container">
+                <h2>Edit Profile</h2>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+    </body>
+    </html>
