@@ -204,7 +204,10 @@ body {
 }
 
 
-
+/* --------------------------left-cart-------------------------- */
+#left-arrow{
+    rotate: 180deg;
+}
 
 .card-btn {
     display: block;

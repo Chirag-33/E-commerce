@@ -22,6 +22,7 @@
 
         <h2 class="product-category">best selling</h2>
         <div class="product-slider">
+            <img src="static\asset\images\arrow.png" alt="left-arrow" id="left-arrow">
             <div class="product-container">
                 {% for product in best_selling_products %}
                 <a href="{% url 'core:product_detail' product.id %}">
@@ -38,7 +39,9 @@
                 </div>
                 </a>
                 {% endfor %}
+                
             </div>
+            <img src="static\asset\images\arrow.png" alt="">
         </div>
 
         <h2 class="product-category">New Arrivals</h2>
