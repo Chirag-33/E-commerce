@@ -1,10 +1,12 @@
-const headerImage = document.querySelector('.hero-section .content img');
+const headerImage = document.querySelector('.content img');
 
 function changeImage() {
   const imagePaths = [
-    'static/asset/images/header.jpg',
+   
     'static/asset/images/header2.jpg',
-    'static/asset/images/header3.jpg'
+    'static/asset/images/header3.jpg',
+    'static/asset/images/header4.jpg',
+    'static/asset/images/header5.jpg'
    
   ];
   let imageIndex = 0;
@@ -15,7 +17,7 @@ function changeImage() {
     imageIndex = (imageIndex + 1) % imagePaths.length;
   }
 
-  setInterval(changeImageSrc, 2000); 
+  setInterval(changeImageSrc, 3000); 
 }
 
 changeImage();
@@ -161,21 +163,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // ----------------------------------------------User Profile-----------------------------------------------------------
+document.addEventListener('DOMContentLoaded',()=>{
+    const profile_image = document.getElementById('user-icon')
+    const profile_dropDown = document.getElementById('profile_dropDown')
 
-document.addEventListener('DOMContentLoaded', (event)=>{
-    const profileImage = document.getElementById('profile_image')
-    const profileDropsown = document.getElementById('profiledropdown')
-
-    profileImage.addEventListener('click', ()=>{
-        if (profileDropsown.style.display==='none' || profileDropsown.style.display == ''){
-            profileDropsown.style.display = 'block'
+    profile_image.addEventListener('click',()=>{
+        if (profile_dropDown.style.display === 'none' || profile_dropDown.style.display==''){
+            profile_dropDown.style.display='block'
         }else{
-            profileDropsown.style.display = 'none'
+            profile_dropDown.style.display = 'none'
         }
-        document.addEventListener('click', (event)=>{
-            if (!profileImage.contains(event.target) && !profileDropsown.contains(event.target)){
-                profileDropsown.style.display = 'none'
+        
+        document.addEventListener('click',(event)=>{
+            if(!profile_image.contains(event.target)&& !profile_dropDown.contains(event.target)){
+                profile_dropDown.style.display = 'none'
             }
+            
         })
     })
 })

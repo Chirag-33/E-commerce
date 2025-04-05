@@ -47,7 +47,7 @@
 <body>
     <nav class="navbar">
         <div class="nav-items">
-            <a href="{% url 'core:index' %}">
+            <a href="{% url 'core:index' %}" id="website-logo">
                 <img src="{% static 'asset/images/e-commerce logo.jpeg' %}" alt="Website logo" id="brand-logo">
             </a>
             <div class="right-section">
@@ -58,10 +58,22 @@
                 
             </div>
             <div class="icon-group">
-                <img src="{% static 'asset/images/user.png' %}" alt="user logo">
-                <a href="{% url 'core:cart_detail' %}">
-                    <img src="{% static 'asset/images/cart.png' %}" alt="cart">
-                </a>
+                <div id="user-icon">
+                    <img src="{% static 'asset/images/user.png' %}" alt="user logo">
+                    <div id="profile_dropDown">
+                        <ul>
+                            <li><a href="{% url 'core:profile' %}">profile</a></li>
+                            <li><a href="{% url 'userauth:login_view' %}">sign-in</a></li>
+                            <li><a href="{% url 'userauth:logout' %}">sign-out</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="user-cart">
+                    <a href="{% url 'core:cart_detail' %}">
+                        <img src="{% static 'asset/images/cart.png' %}" alt="cart">
+                    </a>
+                </div>
+
             </div>
         </div>
     </nav>
