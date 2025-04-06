@@ -24,6 +24,50 @@ changeImage();
   
 
 
+
+// -------------------------------------arrow---------------------------------------------------------
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const leftArrows = document.getElementsByClassName('left-arrow');
+    const rightArrows = document.getElementsByClassName('right-arrow');
+    const productContainers = document.getElementsByClassName('product-container');
+    
+    const productCardWidth = 300; // Or use .offsetWidth to get dynamic size
+
+    for (let i = 0; i < productContainers.length; i++) {
+        let currentIndex = 0;
+        const container = productContainers[i];
+        const leftArrow = leftArrows[i];
+        const rightArrow = rightArrows[i];
+
+        leftArrow.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                container.scrollBy({
+                    left: -productCardWidth,
+                    behavior: 'smooth'
+                });
+            }
+        });
+
+        rightArrow.addEventListener('click', () => {
+            const visibleProducts = Math.floor(container.clientWidth / productCardWidth);
+            const totalProducts = container.children.length;
+
+            if (currentIndex < totalProducts - visibleProducts) {
+                currentIndex++;
+                container.scrollBy({
+                    left: productCardWidth,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    }
+});
+
+
 const createFooter = () => {
     let footer = document.querySelector('footer');
     let logoUrl = footer.getAttribute('data-logo-url');
@@ -107,57 +151,7 @@ sizeBtns.forEach((item, i) => {
     })
 })
 
-document.addEventListener('DOMContentLoaded', function() { 
-    var searchInput = document.getElementById('search-input');
-    var suggestionsBox = document.getElementById('suggestions');
 
-    // Hide suggestions when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!suggestionsBox.contains(e.target) && e.target !== searchInput) {
-            suggestionsBox.innerHTML = '';
-        }
-    });
-
-    // Hide suggestions on pressing Esc key
-    searchInput.addEventListener('keydown', function(e) {
-        if (e.key === "Escape") {
-            suggestionsBox.innerHTML = '';
-        }
-    });
-
-    // Handle input for search and display suggestions
-    searchInput.addEventListener('keyup', function() {
-        var query = this.value;
-        if (query.length > 1) {
-            fetch(`/product-autocomplete/?q=${query}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    suggestionsBox.innerHTML = '';
-                    data.forEach(function(item) {
-                        var div = document.createElement('div');
-                        div.textContent = item;
-                        div.classList.add('suggestion-item');
-
-                        // Add click event to populate the input field and hide suggestions
-                        div.addEventListener('click', function() {
-                            searchInput.value = item; // Fill input field with clicked item
-                            suggestionsBox.innerHTML = ''; // Clear suggestions
-                        });
-
-                        suggestionsBox.appendChild(div);
-                    });
-                })
-                .catch(error => console.error('Fetch error:', error));
-        } else {
-            suggestionsBox.innerHTML = '';
-        }
-    });
-});
 
 
 

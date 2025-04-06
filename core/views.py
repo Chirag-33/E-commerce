@@ -185,28 +185,6 @@ def product_detail(request, product_id):
     }
     return render(request, 'core/product_detail.html', context)
 
-
-def product_autocomplete(request):
-    if 'q' in request.GET:
-        query = request.GET['q']
-        products = Product.objects.filter(
-            Q(name__icontains=query) | Q(category__icontains=query)
-        )[:10]
-        results = [product.name for product in products]
-        return JsonResponse(results, safe=False)
-    return JsonResponse([], safe=False)
-
-def product_list(request):
-    query = request.GET.get('q', '')
-    if query:
-        products = Product.objects.filter(
-            Q(name__icontains=query) | Q(category__icontains=query)
-        )
-    else:
-        products = Product.objects.all()
-    
-    return render(request, 'core/product_list.html', {'products': products})
-
 @login_required
 def profile_view(request):
     user = request.user
@@ -302,3 +280,15 @@ def payment_success_view(request):
 @login_required
 def payment_failed_view(request):
     return render(request, 'core/payment_failed.html')
+
+def search(request):
+    search_result = request.GET.get('search','')
+    products = Product.objects.all()
+    if search_result:
+        products = products.filter(
+            Q(name__icontains = search_result)|
+            Q(description__icontains = search_result)|
+            Q(price__icontains = search_result)|
+            Q(category__icontains = search_result))
+            
+    return render(request, 'core/search_result.html/',context={'products':products})

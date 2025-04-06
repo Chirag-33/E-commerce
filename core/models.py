@@ -57,9 +57,6 @@ class Ratings(models.Model):
     def __str__(self):
         return f'{self.stars} starts by {self.user.username} on {self.product.name}'
 
-
-
-
     def __str__(self):
         return f'{self.quantity} x {self.product.name} in {self.cart.user.username}'
 

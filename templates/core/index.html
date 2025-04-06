@@ -14,6 +14,8 @@
         <div class="content">
             <img src="{% static 'asset/images/header.jpg' %}" class="logo" alt="">
         </div>
+
+        
     </header>
     <section class="product">
 
@@ -22,7 +24,7 @@
 
         <h2 class="product-category">best selling</h2>
         <div class="product-slider">
-            <img src="static\asset\images\arrow.png" alt="left-arrow" id="left-arrow">
+            <img src="static\asset\images\arrow.png" alt="left-arrow" class="left-arrow">
             <div class="product-container">
                 {% for product in best_selling_products %}
                 <a href="{% url 'core:product_detail' product.id %}">
@@ -41,12 +43,12 @@
                 {% endfor %}
                 
             </div>
-            <img src="static\asset\images\arrow.png" alt="">
+            <img src="static\asset\images\arrow.png" alt="arrow" class="right-arrow">
         </div>
 
         <h2 class="product-category">New Arrivals</h2>
         <div class="product-slider">
-
+            <img src="static\asset\images\arrow.png" alt="left-arrow" class="left-arrow">
             <div class="product-container">
                 {% for product in new_arrivals %}
                 <a href="{% url 'core:product_detail' product.id %}">
@@ -64,13 +66,14 @@
                 </a>
                 {% endfor %}
             </div>
+            <img src="static\asset\images\arrow.png" alt="arrow" class="right-arrow">
         </div>
 
     
 
         <h2 class="product-category">Grocery</h2>
         <div class="product-slider">
-
+            <img src="static\asset\images\arrow.png" alt="left-arrow" class="left-arrow">
             <div class="product-container">
                 {% for product in Grocery %}
                 <a href="{% url 'core:product_detail' product.id %}">
@@ -88,11 +91,12 @@
                 </a>
                 {% endfor %}
             </div>
+            <img src="static\asset\images\arrow.png" alt="arrow" class="right-arrow">
         </div>
 
         <h2 class="product-category">Books</h2>
         <div class="product-slider">
-
+            <img src="static\asset\images\arrow.png" alt="left-arrow" class="left-arrow">
             <div class="product-container">
                 {% for product in Books %}
                 <a href="{% url 'core:product_detail' product.id %}">
@@ -110,11 +114,12 @@
                 </a>
                 {% endfor %}
             </div>
+            <img src="static\asset\images\arrow.png" alt="arrow" class="right-arrow">
         </div>
 
         <h2 class="product-category">Camera</h2>
         <div class="product-slider">
-
+            <img src="static\asset\images\arrow.png" alt="left-arrow" class="left-arrow">
             <div class="product-container">
                 {% for product in Camera %}
                 <a href="{% url 'core:product_detail' product.id %}">
@@ -132,11 +137,12 @@
                 </a>
                 {% endfor %}
             </div>
+            <img src="static\asset\images\arrow.png" alt="arrow" class="right-arrow">
         </div>
 
         <h2 class="product-category">Shoes</h2>
         <div class="product-slider">
-
+            <img src="static\asset\images\arrow.png" alt="left-arrow" class="left-arrow">
             <div class="product-container">
                 {% for product in Shoes %}
                 <a href="{% url 'core:product_detail' product.id %}">
@@ -154,10 +160,12 @@
                 </a>
                 {% endfor %}
             </div>
+            <img src="static\asset\images\arrow.png" alt="arrow" class="right-arrow">
         </div>
 
         <h2 class="product-category">Clothes</h2>
         <div class="product-slider">
+            <img src="static\asset\images\arrow.png" alt="left-arrow" class="left-arrow">
             <div class="product-container">
                 {% for product in Clothes %}
                 <a href="{% url 'core:product_detail' product.id %}">
@@ -175,11 +183,12 @@
                 </a>
                 {% endfor %}
             </div>
+            <img src="static\asset\images\arrow.png" alt="arrow" class="right-arrow">
         </div>
 
         <h2 class="product-category">Furniture</h2>
         <div class="product-slider">
-
+            <img src="static\asset\images\arrow.png" alt="left-arrow" class="left-arrow">
             <div class="product-container">
                 {% for product in Furniture %}
                 <a href="{% url 'core:product_detail' product.id %}">
@@ -197,6 +206,7 @@
                 </a>
                 {% endfor %}
             </div>
+            <img src="static\asset\images\arrow.png" alt="arrow" class="right-arrow">
         </div>
 
         
