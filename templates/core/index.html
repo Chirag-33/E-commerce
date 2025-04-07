@@ -10,18 +10,37 @@
 </head>
 <body>
     {% block content %}
-    <header class="hero-section">
-        <div class="content">
-            <img src="{% static 'asset/images/header.jpg' %}" class="logo" alt="">
-        </div>
+    <header>
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="https://cdn.pixabay.com/photo/2023/12/14/00/20/alaska-8448009_1280.jpg" class="d-block w-100 h-50" data-bs-interval="1000" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="https://cdn.pixabay.com/photo/2024/02/24/10/31/norway-8593725_1280.jpg" class="d-block w-100 h-50" data-bs-interval="1000"  alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="https://cdn.pixabay.com/photo/2023/04/28/10/03/chapel-7956274_1280.jpg" class="d-block w-100 h-50" alt="...">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
 
         
     </header>
     <section class="product">
-
-
-
-
         <h2 class="product-category">best selling</h2>
         <div class="product-slider">
             <img src="static\asset\images\arrow.png" alt="left-arrow" class="left-arrow">

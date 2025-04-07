@@ -1,26 +1,26 @@
-const headerImage = document.querySelector('.content img');
+// const headerImage = document.querySelector('.content img');
 
-function changeImage() {
-  const imagePaths = [
+// function changeImage() {
+//   const imagePaths = [
    
-    'static/asset/images/header2.jpg',
-    'static/asset/images/header3.jpg',
-    'static/asset/images/header4.jpg',
-    'static/asset/images/header5.jpg'
+//     'static/asset/images/header2.jpg',
+//     'static/asset/images/header3.jpg',
+//     'static/asset/images/header4.jpg',
+//     'static/asset/images/header5.jpg'
    
-  ];
-  let imageIndex = 0;
+//   ];
+//   let imageIndex = 0;
 
-  function changeImageSrc() {
-    const imagePath = imagePaths[imageIndex];
-    headerImage.src = imagePath; 
-    imageIndex = (imageIndex + 1) % imagePaths.length;
-  }
+//   function changeImageSrc() {
+//     const imagePath = imagePaths[imageIndex];
+//     headerImage.src = imagePath; 
+//     imageIndex = (imageIndex + 1) % imagePaths.length;
+//   }
 
-  setInterval(changeImageSrc, 3000); 
-}
+//   setInterval(changeImageSrc, 3000); 
+// }
 
-changeImage();
+// changeImage();
   
 
 

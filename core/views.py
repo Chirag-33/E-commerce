@@ -283,12 +283,11 @@ def payment_failed_view(request):
 
 def search(request):
     search_result = request.GET.get('search','')
-    products = Product.objects.all()
+    products = []
     if search_result:
-        products = products.filter(
+        products = Product.objects.filter(
             Q(name__icontains = search_result)|
             Q(description__icontains = search_result)|
             Q(price__icontains = search_result)|
-            Q(category__icontains = search_result))
-            
+            Q(category__icontains = search_result))      
     return render(request, 'core/search_result.html/',context={'products':products})
