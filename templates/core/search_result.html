@@ -21,7 +21,7 @@
                   <div class="product-details">
                     <h2>{{ product.name }}</h2>
                     <p>Price: ${{ product.price }}</p>
-                    <button class="result_btn">Add to cart</button>
+                    <a href="{% url 'core:add_to_cart' product.id%}"><button class="result_btn">Add to cart</button></a>
                     <button class="result_btn">Buy Now </button>
                   </div>
                 </div>

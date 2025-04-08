@@ -1,82 +1,95 @@
+{% extends 'core/navbar.html' %}
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Detail</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'asset\css\product_detail.css' %}">
-    
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'asset\css\product_detail.css' %}">
 </head>
 <body>
     {% block content %}
-    <div class="product-detail">
-        <h2 class="product-name">{{ product.name }}</h2>
-        <div class="product-image-container">
-            <img src="{{ product.image }}" alt="{{ product.name }}" class="product-image">
+    <div>
+        <h2> {{product.name}} </h2>
+        <div>
+            <img src="{{product.image}}" alt="{{product.name}}">
         </div>
-        <p class="product-description">{{ product.description }}</p>
-        <p class="product-price">Price: ${{ product.price }}</p>
-
-        <div class="ratings">
-            <h3>Ratings:</h3>
-            <span class="heading">User Rating</span>
-            <div class="stars">
-                {% for star in "★★★★★" %}
-                    {% if forloop.counter <= average_rating|default:0 %}
-                        <span class="fa fa-star checked"></span>
-                    {% else %}
-                        <span class="fa fa-star"></span>
-                    {% endif %}
-                {% endfor %}
-            </div>
-            <p>{{ average_rating|default:0 }} average based on {{ ratings.count }} reviews.</p>
-            <hr>
-        </div>
-
-        <div class="comments">
-            <h3>Comments:</h3>
-            {% for comment in comments %}
-                <div class="comment">
-                    <p>{{ comment.text }} - <span class="comment-user">{{ comment.user.username }}</span></p>
-                </div>
-            {% empty %}
-                <p>No comments yet.</p>
-            {% endfor %}
-        </div>
-
-        <div class="rate-product">
-            <h3>Rate this product:</h3>
-            <form method="post">
-                {% csrf_token %}
-                <label for="stars">Stars:</label>
-                <select name="stars" id="stars">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                <button type="submit" name="rating" class="btn">Submit Rating</button>
-            </form>
-        </div>
-
-        <div class="add-comment">
-            <h3>Add a Comment:</h3>
-            <form method="POST">
-                {% csrf_token %}
-                <textarea name="comment_text" rows="4" cols="50"></textarea>
-                <button type="submit" name="comment" class="btn">Submit Comment</button>
-            </form>
-        </div>
-
-        <div class="add-to-cart">
-            <h3>Add to Cart:</h3>
-            <a href="{% url 'core:add_to_cart' product.id %}">
-                <button type="button" class="btn">Add to Cart</button>
-            </a>
-        </div>
+        <p> {{product.description}} </p>
+        <p> {{product.price}} </p>
     </div>
+    <span class="heading">User Rating</span>
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star"></span>
+    <p>{{average_rating}} average based on {{total_reviews}} reviews.</p>
+    <hr style="border:3px solid #f1f1f1">
+
+    <div class="row">
+      <div class="side">
+        <div>5 star</div>
+      </div>
+      <div class="middle">
+        <div class="bar-container">
+          <div class="bar-5"></div>
+        </div>
+      </div>
+      <div class="side right">
+        <div>150</div>
+      </div>
+      <div class="side">
+        <div>4 star</div>
+      </div>
+      <div class="middle">
+        <div class="bar-container">
+          <div class="bar-4"></div>
+        </div>
+      </div>
+      <div class="side right">
+        <div>63</div>
+      </div>
+      <div class="side">
+        <div>3 star</div>
+      </div>
+      <div class="middle">
+        <div class="bar-container">
+          <div class="bar-3"></div>
+        </div>
+      </div>
+      <div class="side right">
+        <div>15</div>
+      </div>
+      <div class="side">
+        <div>2 star</div>
+      </div>
+      <div class="middle">
+        <div class="bar-container">
+          <div class="bar-2"></div>
+        </div>
+      </div>
+      <div class="side right">
+        <div>6</div>
+      </div>
+      <div class="side">
+        <div>1 star</div>
+      </div>
+      <div class="middle">
+        <div class="bar-container">
+          <div class="bar-1"></div>
+        </div>
+      </div>
+      <div class="side right">
+        <div>20</div>
+      </div>
+    </div>    
     {% endblock %}
 </body>
 </html>
+
+
+
+

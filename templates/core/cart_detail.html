@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart</title>
     <link rel="stylesheet" href="{% static 'asset/css/cart.css' %}">
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
 </head>
 <body>
 {% block content %}
@@ -17,17 +20,24 @@
                 <li class="cart-item">
                     <img src="{{ item.product.image }}" alt="{{ item.product.name }}" class="cart-img">
                     <div class="item-details">
-                        <span class="product-name">{{ item.product.name }}</span>
-                        <span class="product-quantity">Quantity: {{ item.quantity }}</span>
-                        <span class="product-price">Price: ${{ item.product.price }}</span>
-                        <a href="{% url 'core:remove_from_cart' item.id %}" class="remove-btn">Remove</a>
+                        <div>
+                            <span class="product-name">{{ item.product.name }}</span>
+                        </div>
+                        <div>
+                            <span class="product-quantity">Quantity: {{ item.quantity }}</span>
+                            <span class="product-price">Price: ${{ item.product.price }}</span>
+                            <a href="{% url 'core:remove_from_cart' item.id %}" class="remove-btn">Remove</a>
+                            <a href="{% url 'core:update_cart' item.id %}"><button><i class="fa-solid fa-minus"></i></button></a>
+                            <a href="{% url 'core:update_add_cart' item.id %}"><button><i class="fa-solid fa-plus"></i></button></a>
+                        </div>
+                        
                     </div>
                 </li>
             {% endfor %}
         </ul>
         <div class="cart-summary">
             <p>Total Price: ${{ total_price }}</p>
-            <a href="{% url 'core:payment' %}" class="checkout-btn">Proceed to Checkout</a>  <!-- Placeholder for checkout -->
+            <a href="{% url 'core:payment' %}" class="checkout-btn">Proceed to Checkout</a>  
         </div>
     {% else %}
         <p>Your cart is empty.</p>

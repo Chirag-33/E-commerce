@@ -5,16 +5,14 @@ import stripe.error
 from . forms import VendorLoginForm,VendorCreationForm,vendor_products ,ProfileForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
-from . models import Vendor,Product,Comment,Ratings,Cart,CartItem,UserProfile
-from django.db.models import Avg
-from django.http import JsonResponse
+from . models import *
 from  django.db.models import Q
-from django.shortcuts import render
-from .models import Product
 import stripe
 from django.conf import settings
 from .forms import PaymentForm
 from django.views.decorators.csrf import csrf_exempt
+from . models import AddressForm
+import stripe
 
 
 
@@ -149,41 +147,7 @@ def add_products(request):
 
 
 
-@login_required
-def product_detail(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-    comments = Comment.objects.filter(product=product)
-    ratings = Ratings.objects.filter(product=product)
-    
-    if request.method == 'POST':
-        if 'rating' in request.POST:
-            stars = request.POST.get('stars')
-            if stars:
-                Ratings.objects.update_or_create(
-                    product=product,
-                    user=request.user,
-                    defaults={'stars': stars}
-                )
-                messages.success(request, 'Rating submitted successfully!')
-                return redirect('core:product_detail', product_id=product.id)
-        elif 'comment' in request.POST:
-            text = request.POST.get('comment_text')
-            if text:
-                Comment.objects.create(
-                    product=product,
-                    user=request.user,
-                    text=text
-                )
-                messages.success(request, 'Comment submitted successfully!')
-                return redirect('core:product_detail', product_id=product.id)
-    
-    context = {
-        'product': product,
-        'comments': comments,
-        'ratings': ratings,
-        'average_rating': ratings.aggregate(Avg('stars'))['stars__avg']
-    }
-    return render(request, 'core/product_detail.html', context)
+
 
 @login_required
 def profile_view(request):
@@ -237,10 +201,23 @@ def remove_from_cart(request, item_id):
     cart_item.delete()
     return redirect('core:cart_detail')
 
+@login_required
+def update_cart(request,item_id):
+    cart_item = get_object_or_404(CartItem,id = item_id)
+    if cart_item.quantity>1:
+        cart_item.quantity -=1 
+        cart_item.save()
+    else:
+        cart_item.delete()
+    return redirect('core:cart_detail')
 
-from django.shortcuts import render, redirect
-from django.conf import settings
-import stripe
+@login_required
+def update_add_cart(request,item_id):
+    cart_item = get_object_or_404(CartItem, id = item_id)
+    if cart_item.quantity>=1:
+        cart_item.quantity+=1
+        cart_item.save()
+    return redirect('core:cart_detail')
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -291,3 +268,62 @@ def search(request):
             Q(price__icontains = search_result)|
             Q(category__icontains = search_result))      
     return render(request, 'core/search_result.html/',context={'products':products})
+
+from django.db.models import Count, Avg
+from core.models import CommentAndRating  # Assuming this is your model
+
+@login_required
+def comment_rating(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    user = request.user
+
+    if request.method == 'POST':
+        stars = int(request.POST.get('stars', 0))
+        comment_text = request.POST.get('comment_text', '')
+
+        obj, created = CommentAndRating.objects.update_or_create(
+            user=user,
+            product=product,
+            defaults={
+                'stars': stars,
+                'text': comment_text
+            }
+        )
+
+        messages.success(request, "Your rating and comment has been saved ")
+        return redirect('core:product_detail', product_id=product.id)
+
+    ratings = CommentAndRating.objects.filter(product=product)
+    average_rating = ratings.aggregate(avg=Avg('stars'))['avg'] or 0
+    total_reviews = ratings.count()
+
+    star_counts = ratings.values('stars').annotate(count=Count('stars')).order_by('-stars')
+    star_data = {i: 0 for i in range(1, 6)}
+    for item in star_counts:
+        star_data[item['stars']] = item['count']
+
+    context = {
+        'product': product,
+        'average_rating': round(average_rating, 1),
+        'total_reviews': total_reviews,
+        'star_data': star_data,
+        'all_ratings': ratings,  
+    }
+
+    return render(request, 'core/product_detail.html', context)
+
+@login_required
+def add_address(request):
+    if request.method == 'POST':
+        form = AddressForm
+        if AddressForm.is_valid():
+            address = form.save(commit=False)
+            address.user = request.user
+            address.save()
+            return redirect('core:payment.html')
+    else:
+        form = AddressForm()
+    return render(request, 'core/address.html', {"form":form})
+
+def update_address(request,address_id):
+    address = get_object_or_404(Adres, id = address_id, user=request.user)

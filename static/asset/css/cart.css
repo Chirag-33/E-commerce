@@ -27,6 +27,7 @@ h2 {
 }
 
 .cart-item {
+    width: 100%;
     display: flex;
     align-items: center;
     border-bottom: 1px solid #f1f1f1;
@@ -48,11 +49,19 @@ h2 {
 .product-name {
     font-size: 18px;
     font-weight: bold;
+    white-space: nowrap;        
+    overflow: hidden;           
+    text-overflow: ellipsis;    
+    width: 700px;               
+    display: inline-block;      
 }
 
+
 .product-quantity, .product-price {
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: bold;
     color: #555;
+
 }
 
 .remove-btn {

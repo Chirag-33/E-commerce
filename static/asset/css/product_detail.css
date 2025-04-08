@@ -1,129 +1,74 @@
-    /* General styling */
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f8f8f8;
-        margin: 0;
-        padding: 20px;
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial;
+    margin: 0 auto; /* Center website */
+    max-width: 800px; /* Max width */
+    padding: 20px;
+  }
+  
+  .heading {
+    font-size: 25px;
+    margin-right: 25px;
+  }
+  
+  .fa {
+    font-size: 25px;
+  }
+  
+  .checked {
+    color: orange;
+  }
+  
+  /* Three column layout */
+  .side {
+    float: left;
+    width: 15%;
+    margin-top: 10px;
+  }
+  
+  .middle {
+    float: left;
+    width: 70%;
+    margin-top: 10px;
+  }
+  
+  /* Place text to the right */
+  .right {
+    text-align: right;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* The bar container */
+  .bar-container {
+    width: 100%;
+    background-color: #f1f1f1;
+    text-align: center;
+    color: white;
+  }
+  
+  /* Individual bars */
+  .bar-5 {width: 60%; height: 18px; background-color: #04AA6D;}
+  .bar-4 {width: 30%; height: 18px; background-color: #2196F3;}
+  .bar-3 {width: 10%; height: 18px; background-color: #00bcd4;}
+  .bar-2 {width: 4%; height: 18px; background-color: #ff9800;}
+  .bar-1 {width: 15%; height: 18px; background-color: #f44336;}
+  
+  /* Responsive layout - make the columns stack on top of each other instead of next to each other */
+  @media (max-width: 400px) {
+    .side, .middle {
+      width: 100%;
     }
-
-    .product-detail {
-        max-width: 800px;
-        margin: 0 auto;
-        background: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Hide the right column on small screens */
+    .right {
+      display: none;
     }
-
-    /* Product details */
-    .product-name {
-        text-align: center;
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-
-    .product-image-container {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .product-image {
-        max-width: 100%;
-        border-radius: 10px;
-    }
-
-    .product-description {
-        font-size: 16px;
-        line-height: 1.6;
-        margin-bottom: 20px;
-    }
-
-    .product-price {
-        font-size: 18px;
-        color: #e67e22;
-        margin-bottom: 20px;
-    }
-
-    /* Ratings section */
-    .ratings {
-        margin-bottom: 20px;
-    }
-
-    .heading {
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-    .stars {
-        display: inline-block;
-    }
-
-    .fa-star {
-        font-size: 18px;
-        color: #ddd;
-    }
-
-    .fa-star.checked {
-        color: #e67e22;
-    }
-
-    hr {
-        border: 3px solid #f1f1f1;
-        margin: 20px 0;
-    }
-
-    /* Comments section */
-    .comments {
-        margin-bottom: 20px;
-    }
-
-    .comment {
-        border-bottom: 1px solid #f1f1f1;
-        padding: 10px 0;
-    }
-
-    .comment-user {
-        font-weight: bold;
-    }
-
-    /* Rate product section */
-    .rate-product {
-        margin-bottom: 20px;
-    }
-
-    /* Add comment section */
-    .add-comment {
-        margin-bottom: 20px;
-    }
-
-    /* Add to cart section */
-    .add-to-cart {
-        margin-bottom: 20px;
-    }
-
-    /* Button styling */
-    .btn {
-        background-color: #e67e22;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 10px 0;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: background 0.3s ease;
-    }
-
-    .btn:hover {
-        background-color: #d35400;
-    }
-
-    select {
-        padding: 5px;
-        margin-right: 10px;
-        border-radius: 5px;
-        border: 1px solid #ddd;
-    }
+  }

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator,MaxValueValidator
 
 class Vendor(User):
     USER_TYPE_CHOICES = (
@@ -40,29 +41,6 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-class Comment(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    text = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f'commented by {self.user.username} on {self.product.name}'
-
-class Ratings(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    stars = models.PositiveSmallIntegerField()
-
-    def __str__(self):
-        return f'{self.stars} starts by {self.user.username} on {self.product.name}'
-
-    def __str__(self):
-        return f'{self.quantity} x {self.product.name} in {self.cart.user.username}'
-
-
-
-
 class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product, through='CartItem')
@@ -93,3 +71,32 @@ class UserProfile(models.Model):
     profile_picture = models.ImageField(upload_to='profile_pictures', blank=True, null=True)
     phone_number = models.CharField(max_length=10 , blank=True)
     
+
+class CommentAndRating(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='rating_comment')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    stars = models.PositiveBigIntegerField(null=True, blank=True, validators=[MinValueValidator(1),MaxValueValidator(5)])
+    comment = models.TextField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.user.username} rated {self.stars} and commented on {self.product.name}'
+
+    @classmethod
+    def get_average_rating(cls,product):
+        ratings = cls.objects.filter(product=product,star__isnull = False)
+        if ratings.exists():
+            return round(sum(r.stars for r in ratings)/ ratings.count(),1)
+
+class Adres(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    address = models.TextField()
+    phone_number = models.CharField(max_length=10)
+    create_at = models.DateTimeField(auto_created=True)
+
+from django import forms
+
+class AddressForm(forms.Form):
+    class Meta:
+        model = Adres
+        fields = ['address','phone_number']
